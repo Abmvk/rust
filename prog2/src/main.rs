@@ -1,8 +1,6 @@
-//use std::io;
 use std::io::{self, Write};
 use std::cmp::Ordering;
 use rand::Rng;
-//use ansi_term::Colour::RGB;
 
 fn clear_screen() {
 	let mut stdout = io::stdout();
