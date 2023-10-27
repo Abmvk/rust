@@ -8,6 +8,12 @@ trait Kleur {
     }
 }
 
+trait InhoudBerekening: OppervlakteBerekening {
+    fn inhoud(&self, hoogte: f64) -> f64 {
+        self.oppervlakte() * hoogte
+    }
+}
+
 struct Vierkant {
     zijde: f64,
 }
@@ -19,6 +25,7 @@ impl OppervlakteBerekening for Vierkant {
 }
 
 impl Kleur for Vierkant {}
+impl InhoudBerekening for Vierkant {}
 
 struct Cirkel {
     straal: f64,
@@ -31,6 +38,7 @@ impl OppervlakteBerekening for Cirkel {
 }
 
 impl Kleur for Cirkel {}
+impl InhoudBerekening for Cirkel {}
 
 struct Driehoek {
     basis: f64,
@@ -44,10 +52,8 @@ impl OppervlakteBerekening for Driehoek {
 }
 
 impl Kleur for Driehoek {}
+impl InhoudBerekening for Driehoek {}
 
-fn inhoud(figuur: &impl OppervlakteBerekening, hoogte: f64) -> f64 {
-    figuur.oppervlakte() * hoogte
-}
 
 fn main() {
     let vierkant = Vierkant { zijde: 5.0 };
@@ -60,16 +66,12 @@ fn main() {
     println!("\nOppervlakte van het vierkant: {}", vierkant.oppervlakte());
     println!("Oppervlakte van de cirkel: {}", cirkel.oppervlakte());
     println!("Oppervlakte van de driehoek: {}\n", driehoek.oppervlakte());
+    
     println!("De kleur van het vierkant is {}", vierkant.kleur());
     println!("De kleur van de cirkel is {}", cirkel.kleur());
     println!("De kleur van de driehoek is {}\n", driehoek.kleur());
-    println!(
-        "De inhoud van een vierkante plank is {}",
-        inhoud(&vierkant, 2.0)
-    );
-    println!("De inhoud van een ronde plank is {}", inhoud(&cirkel, 2.0));
-    println!(
-        "De inhoud van een driehoukige plank is {}",
-        inhoud(&driehoek, 2.0)
-    );
+    
+    println!("De inhoud van een vierkante plank is {}", vierkant.inhoud(2.0));
+    println!("De inhoud van een ronde plank is {}", cirkel.inhoud(2.0));
+    println!("De inhoud van een driehoukige plank is {}", driehoek.inhoud(2.0));
 }
