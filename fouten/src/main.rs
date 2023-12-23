@@ -45,4 +45,8 @@ fn main() {
     //  let waarde = resultaat.expect("Kan de waarde niet berekenen");
     //
     //  println!("Resultaat: {waarde}");
+
+
+if 1==2 {
+    hallo
 }
