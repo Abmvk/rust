@@ -46,7 +46,10 @@ fn main() {
     //
     //  println!("Resultaat: {waarde}");
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 8518b0ded78d1d3ff7c0951f6c80e5d7e5b8d8e1
 if 1==2 {
     hallo
 }
