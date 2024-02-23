@@ -1,6 +1,7 @@
-use actix_web::{web, App, HttpServer, Responder};
+use actix_web::{get, App, HttpServer, Responder};
 use chrono::Local;
 
+#[get("/")]
 async fn index() -> impl Responder {
     let now = Local::now();
     let os_type = sys_info::os_type().unwrap_or_else(|_| "Onbekend".to_string());
@@ -16,7 +17,7 @@ async fn index() -> impl Responder {
     });
 
     format!(
-        "Het is nu {}\n\n\nOS: {} {}\n\nTotale geheugen: {} MB\nVrij geheugen: {} MB",
+        "Het is nu {}\n\n\nOS: {} {}\n\nTotale geheugen: {} MB\nVrij geheugen: {} MB\n\n\nServer geschreven in Rust",
         now.format("%Y-%m-%d %H:%M:%S"),
         os_type,
         os_release,
@@ -27,7 +28,7 @@ async fn index() -> impl Responder {
 
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
-    HttpServer::new(|| App::new().route("/", web::get().to(index)))
+    HttpServer::new(|| App::new().service(index))
         .bind("0.0.0.0:8080")?
         .run()
         .await
